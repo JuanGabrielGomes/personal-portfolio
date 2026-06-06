@@ -22,9 +22,9 @@ export const projects = [
   {
     slug: 'sabores-em-foco',
     name: 'Sabores em Foco',
-    descriptionPt: 'Site portfólio para agência de marketing gastronômico. Landing page bilíngue com identidade visual, cases e formulário de contato.',
-    descriptionEn: 'Portfolio site for a gastronomy marketing agency. Bilingual landing page with visual identity, case studies, and contact form.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    descriptionPt: 'Site portfólio para estúdio de marketing gastronômico — hero em vídeo, galeria de fotos sticky e carrossel de vídeos com lightbox customizado. Vanilla HTML/CSS/JS, deploy na Vercel.',
+    descriptionEn: 'Portfolio site for a gastronomy marketing studio — video hero, sticky photo gallery, and video carousel with custom lightbox. Vanilla HTML/CSS/JS, deployed on Vercel.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Vercel'],
     url: 'https://saboresemfoco.com',
     github: 'https://github.com/JuanGabrielGomes/sabores-em-foco',
     image: null,
