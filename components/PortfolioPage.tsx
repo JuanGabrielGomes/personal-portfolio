@@ -224,8 +224,8 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
 
       {/* ── Menu overlay ──────────────────────────────────────────────── */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 40, background: BG, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 'clamp(20px,4vw,36px)', opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? 'all' : 'none', transition: 'opacity 0.3s ease' }}>
-        {([t.nav.work, t.nav.journey, 'Stack', t.nav.contact] as string[]).map((label, i) => (
-          <a key={label} href={(['#work', '#journey', '#stack', '#contact'] as string[])[i]} onClick={() => setMenuOpen(false)}
+        {([t.nav.work, t.nav.journey, 'Stack', 'glim.', t.nav.contact] as string[]).map((label, i) => (
+          <a key={label} href={(['#work', '#journey', '#stack', '#glim', '#contact'] as string[])[i]} onClick={() => setMenuOpen(false)}
             style={{ fontFamily: syne, fontSize: 'clamp(2rem,6vw,3rem)', fontWeight: 400, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#0D0D0D', textDecoration: 'none' }}>
             {label}
           </a>
@@ -381,6 +381,62 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── glim. ─────────────────────────────────────────────────────── */}
+      <section id="glim" style={{ background: '#F5F0EB', padding: 'clamp(60px,10vw,140px) clamp(24px,4vw,64px)' }}>
+        <p style={{ fontFamily: syne, fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#4A4540', opacity: 0.5, margin: '0 0 20px' }}>
+          {t.glim.eyebrow}
+        </p>
+
+        {/* Heading + what/who row */}
+        <div className="glim-header-grid" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 'clamp(32px,6vw,100px)', alignItems: 'start', marginBottom: 'clamp(48px,7vw,96px)' }}>
+          <h2 style={{ fontFamily: syne, fontWeight: 800, fontSize: 'clamp(64px,9vw,140px)', letterSpacing: '-0.04em', lineHeight: 0.85, color: '#4A4540', margin: 0 }}>
+            {t.glim.heading}
+          </h2>
+          <div className="glim-what-who" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(20px,3vw,48px)', paddingTop: 8 }}>
+            {[t.glim.what, t.glim.who].map(item => (
+              <div key={item.label}>
+                <p style={{ fontFamily: inter, fontSize: '0.62rem', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F0A855', margin: '0 0 10px' }}>
+                  {item.label}
+                </p>
+                <p style={{ fontFamily: inter, fontSize: 'clamp(13px,1vw,15px)', color: '#4A4540', lineHeight: 1.7, margin: 0, opacity: 0.8 }}>
+                  {item.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Principles */}
+        <div style={{ borderTop: '1px solid rgba(74,69,64,0.15)', paddingTop: 'clamp(32px,4vw,56px)', marginBottom: 'clamp(40px,5vw,72px)' }}>
+          <p style={{ fontFamily: inter, fontSize: '0.62rem', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#F0A855', margin: '0 0 clamp(24px,3vw,40px)' }}>
+            {locale === 'pt' ? 'Princípios' : 'Principles'}
+          </p>
+          <div className="glim-principles" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(16px,3vw,48px)' }}>
+            {t.glim.principles.map((p, i) => (
+              <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                <span style={{ fontFamily: syne, fontWeight: 800, fontSize: 'clamp(10px,0.9vw,13px)', color: '#F0A855', opacity: 0.6, paddingTop: 2, flexShrink: 0 }}>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 style={{ fontFamily: syne, fontWeight: 700, fontSize: 'clamp(15px,1.2vw,19px)', color: '#4A4540', margin: '0 0 6px', letterSpacing: '-0.01em' }}>
+                    {p.title}
+                  </h3>
+                  <p style={{ fontFamily: inter, fontSize: 'clamp(12px,0.85vw,14px)', color: '#4A4540', opacity: 0.6, lineHeight: 1.65, margin: 0 }}>
+                    {p.body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <a href="https://glimweb.com" target="_blank" rel="noopener noreferrer"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontFamily: syne, fontWeight: 700, fontSize: 'clamp(13px,1vw,16px)', color: '#4A4540', textDecoration: 'none', borderBottom: '1.5px solid #F0A855', paddingBottom: 4, letterSpacing: '0.01em' }}>
+          {t.glim.cta} <span style={{ color: '#F0A855' }}>↗</span>
+        </a>
       </section>
 
       {/* ── Contact ───────────────────────────────────────────────────── */}

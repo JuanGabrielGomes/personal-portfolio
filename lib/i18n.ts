@@ -27,6 +27,18 @@ export const i18n = {
       eyebrow: 'Além do código',
       heading: 'O que me move.',
     },
+    glim: {
+      eyebrow: 'A agência',
+      heading: 'glim.',
+      what: { label: 'O que fazemos', body: 'Engenharia web e design digital de ponta a ponta — da identidade visual ao código em produção. Sites institucionais, e-commerces e produtos digitais com foco em performance, experiência e resultado.' },
+      who: { label: 'Quem atendemos', body: 'Negócios e profissionais que valorizam qualidade e querem uma presença digital que realmente converte. Do autônomo ao pequeno negócio em crescimento.' },
+      principles: [
+        { title: 'Clareza antes de tudo', body: 'Cada decisão tem um propósito. Sem excessos, sem ruído.' },
+        { title: 'Qualidade como padrão', body: 'Não entregamos menos do que o melhor que conseguimos fazer.' },
+        { title: 'Parceria real', body: 'Tratamos cada projeto como se fosse nosso. Porque enquanto estamos nele, é.' },
+      ],
+      cta: 'Conheça a glim.',
+    },
     contact: {
       eyebrow: 'Contato',
       heading: 'Vamos conversar.',
@@ -61,6 +73,18 @@ export const i18n = {
     hobbies: {
       eyebrow: 'Beyond code',
       heading: 'What drives me.',
+    },
+    glim: {
+      eyebrow: 'The studio',
+      heading: 'glim.',
+      what: { label: 'What we do', body: 'End-to-end web engineering and digital design — from visual identity to production-ready code. Institutional sites, e-commerce, and digital products built for performance, experience, and results.' },
+      who: { label: 'Who we serve', body: 'Businesses and professionals who value quality and want a digital presence that actually converts. From solo practitioners to growing small businesses.' },
+      principles: [
+        { title: 'Clarity first', body: 'Every decision has a purpose. No excess, no noise.' },
+        { title: 'Quality as standard', body: 'We never deliver less than the best we can do.' },
+        { title: 'Real partnership', body: 'We treat every project as if it were ours. Because while we\'re in it, it is.' },
+      ],
+      cta: 'Visit glim.',
     },
     contact: {
       eyebrow: 'Contact',

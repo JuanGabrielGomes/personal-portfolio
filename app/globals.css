@@ -125,6 +125,17 @@ body {
   .s2-stats-wrap { padding-left: 15% !important; }
 }
 
+/* glim. section responsive */
+@media (max-width: 767px) {
+  .glim-header-grid { grid-template-columns: 1fr !important; }
+  .glim-what-who { grid-template-columns: 1fr !important; }
+  .glim-principles { grid-template-columns: 1fr !important; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .glim-header-grid { grid-template-columns: auto 1fr !important; }
+  .glim-principles { grid-template-columns: 1fr 1fr !important; }
+}
+
 /* Gallery responsive */
 @media (max-width: 1023px) {
   .gallery-section { height: auto !important; min-height: 100vh !important; overflow: visible !important; }
