@@ -61,6 +61,8 @@ const PROJECT_STYLES = [
 
 function ProjectTile({ project, locale, index }: { project: typeof projects[0]; locale: Locale; index: number }) {
   const [hovered, setHovered] = useState(false)
+  const [tapped, setTapped] = useState(false)
+  const expanded = hovered || tapped
   const style = PROJECT_STYLES[index] ?? PROJECT_STYLES[0]
   const num = String(index + 1).padStart(2, '0')
   const description = locale === 'pt' ? project.descriptionPt : project.descriptionEn
@@ -70,8 +72,9 @@ function ProjectTile({ project, locale, index }: { project: typeof projects[0]; 
       className="gallery-item"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => setTapped(t => !t)}
       style={{
-        flex: hovered ? 4 : 1,
+        flex: expanded ? 4 : 1,
         height: '100%', borderRadius: 12, overflow: 'hidden', cursor: 'pointer',
         transition: 'flex 0.5s cubic-bezier(0.4,0,0.2,1)',
         position: 'relative', background: style.bg,
@@ -79,7 +82,7 @@ function ProjectTile({ project, locale, index }: { project: typeof projects[0]; 
       }}
     >
       {/* Accent top bar */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: style.accent, opacity: hovered ? 1 : 0.35, transition: 'opacity 0.35s' }} />
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: style.accent, opacity: expanded ? 1 : 0.35, transition: 'opacity 0.35s' }} />
 
       {/* Large faded number */}
       <div style={{
@@ -98,7 +101,7 @@ function ProjectTile({ project, locale, index }: { project: typeof projects[0]; 
       {/* Bottom content */}
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: 'clamp(14px,1.8vw,26px)' }}>
         {/* Expandable content */}
-        <div style={{ overflow: 'hidden', maxHeight: hovered ? 300 : 0, transition: 'max-height 0.45s cubic-bezier(0.4,0,0.2,1)', marginBottom: hovered ? 14 : 0 }}>
+        <div className={expanded ? 'gallery-card-expand' : ''} style={{ overflow: 'hidden', maxHeight: expanded ? 300 : 0, transition: 'max-height 0.45s cubic-bezier(0.4,0,0.2,1)', marginBottom: expanded ? 14 : 0 }}>
           <p style={{ fontFamily: inter, fontSize: 'clamp(11px,0.78vw,13px)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.65, margin: '0 0 12px' }}>
             {description}
           </p>
@@ -124,7 +127,7 @@ function ProjectTile({ project, locale, index }: { project: typeof projects[0]; 
         <h3 style={{ fontFamily: syne, fontWeight: 700, fontSize: 'clamp(13px,1.15vw,20px)', color: 'white', margin: '0 0 4px', lineHeight: 1.2 }}>
           {project.name}
         </h3>
-        <p style={{ fontFamily: inter, fontSize: '0.58rem', color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '0.05em', opacity: hovered ? 0 : 1, transition: 'opacity 0.2s' }}>
+        <p className={expanded ? 'gallery-card-tags' : ''} style={{ fontFamily: inter, fontSize: '0.58rem', color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '0.05em', opacity: expanded ? 0 : 1, transition: 'opacity 0.2s' }}>
           {project.tags.slice(0, 3).join(' · ')}
         </p>
       </div>
@@ -289,7 +292,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
             <div className="s2-stats-wrap" style={{ maxWidth: 1200, paddingLeft: '25%', marginTop: 'clamp(48px,6vw,80px)' }}>
               <div style={{ display: 'flex' }}>
                 {stats.map((s, i) => (
-                  <div key={i} style={{ flex: 1, borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none', paddingLeft: i > 0 ? 'clamp(20px,2.5vw,40px)' : 0 }}>
+                  <div key={i} className="s2-stat-item" style={{ flex: 1, borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none', paddingLeft: i > 0 ? 'clamp(20px,2.5vw,40px)' : 0 }}>
                     <StatItem num={s.num} suffix={s.suffix} label={locale === 'pt' ? s.labelPt : s.labelEn} />
                   </div>
                 ))}

@@ -115,9 +115,12 @@ body {
 
 /* Dark section responsive */
 @media (max-width: 767px) {
-  .s2-content { padding-left: 24px !important; padding-right: 24px !important; }
+  .s2-content { padding-left: 24px !important; padding-right: 24px !important; padding-bottom: 56px !important; }
   .s2-statement-wrap { padding-left: 0 !important; }
   .s2-stats-wrap { padding-left: 0 !important; }
+  .s2-stats-wrap > div { flex-direction: column !important; gap: 32px !important; }
+  .s2-stat-item { border-left: none !important; padding-left: 0 !important; border-top: 1px solid rgba(255,255,255,0.1) !important; padding-top: 24px !important; flex: none !important; }
+  .s2-stat-item:first-child { border-top: none !important; padding-top: 0 !important; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .s2-content { padding-left: 40px !important; padding-right: 40px !important; }
@@ -138,10 +141,12 @@ body {
 
 /* Gallery responsive */
 @media (max-width: 1023px) {
-  .gallery-section { height: auto !important; min-height: 100vh !important; overflow: visible !important; }
-  .gallery-row { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; height: auto !important; }
-  .gallery-item { flex: none !important; height: auto !important; aspect-ratio: 4/5 !important; transition: transform 0.3s ease !important; }
+  .gallery-section { height: auto !important; min-height: unset !important; overflow: visible !important; padding-bottom: 40px !important; }
+  .gallery-row { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; height: auto !important; }
+  .gallery-item { flex: none !important; height: auto !important; min-height: 220px !important; aspect-ratio: unset !important; transition: transform 0.3s ease !important; }
   .gallery-item:hover { flex: none !important; transform: scale(1.02) !important; }
+  .gallery-card-expand { max-height: 300px !important; margin-bottom: 14px !important; }
+  .gallery-card-tags { opacity: 0 !important; }
 }
 @media (max-width: 479px) {
   .gallery-row { gap: 6px !important; }
