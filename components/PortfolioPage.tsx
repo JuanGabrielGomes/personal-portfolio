@@ -209,20 +209,25 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
         <a href="#hero" style={{ fontFamily: syne, fontSize: '1.05rem', color: navColor, transition: 'color 0.35s ease', textDecoration: 'none' }}>
           <span style={{ fontWeight: 700 }}>Juan Gabriel</span><span style={{ fontWeight: 800 }}>.</span>
         </a>
-        <button
-          onClick={() => setMenuOpen(o => !o)}
-          onMouseEnter={() => setNavHamHover(true)}
-          onMouseLeave={() => setNavHamHover(false)}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: navColor, transition: 'color 0.35s ease', display: 'flex', alignItems: 'center', padding: 4 }}
-          aria-label="Menu"
-        >
-          {menuOpen ? <X size={24} /> : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <div style={{ width: navHamHover ? 18 : 28, height: 1, background: 'currentColor', transition: 'width 0.2s ease' }} />
-              <div style={{ width: 28, height: 1, background: 'currentColor' }} />
-            </div>
-          )}
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+          <Link href={locale === 'pt' ? '/en' : '/'} style={{ fontFamily: inter, fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: navColor, textDecoration: 'none', opacity: 0.6, transition: 'color 0.35s ease, opacity 0.2s' }}>
+            {locale === 'pt' ? 'EN' : 'PT'}
+          </Link>
+          <button
+            onClick={() => setMenuOpen(o => !o)}
+            onMouseEnter={() => setNavHamHover(true)}
+            onMouseLeave={() => setNavHamHover(false)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: navColor, transition: 'color 0.35s ease', display: 'flex', alignItems: 'center', padding: 4 }}
+            aria-label="Menu"
+          >
+            {menuOpen ? <X size={24} /> : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <div style={{ width: navHamHover ? 18 : 28, height: 1, background: 'currentColor', transition: 'width 0.2s ease' }} />
+                <div style={{ width: 28, height: 1, background: 'currentColor' }} />
+              </div>
+            )}
+          </button>
+        </div>
       </nav>
 
       {/* ── Menu overlay ──────────────────────────────────────────────── */}
@@ -278,9 +283,9 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* ── Dark statement — sticky ────────────────────────────────────── */}
-      <div style={{ position: 'relative', height: '200vh', zIndex: 20 }}>
+      <div className="dark-wrapper" style={{ position: 'relative', height: '200vh', zIndex: 20 }}>
         <div style={{ height: '4vh', background: DARK }} />
-        <div ref={darkRef} style={{ position: 'sticky', top: 0, height: '100vh', background: DARK, overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+        <div ref={darkRef} className="dark-sticky" style={{ position: 'sticky', top: 0, height: '100vh', background: DARK, overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
           <div className="s2-content" style={{ padding: 'clamp(30px,4vw,60px) clamp(24px,4vw,64px) clamp(60px,8vw,120px)' }}>
             <div className="s2-statement-wrap" style={{ maxWidth: 1200, paddingLeft: '25%' }}>
               <p style={{ fontFamily: inter, fontWeight: 300, color: '#dde6f2', letterSpacing: '-0.02em', lineHeight: 1.45, fontSize: 'clamp(18px,2.4vw,38px)', margin: 0 }}>
@@ -290,7 +295,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
               </p>
             </div>
             <div className="s2-stats-wrap" style={{ maxWidth: 1200, paddingLeft: '25%', marginTop: 'clamp(48px,6vw,80px)' }}>
-              <div style={{ display: 'flex' }}>
+              <div className="s2-stats-row" style={{ display: 'flex' }}>
                 {stats.map((s, i) => (
                   <div key={i} className="s2-stat-item" style={{ flex: 1, borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none', paddingLeft: i > 0 ? 'clamp(20px,2.5vw,40px)' : 0 }}>
                     <StatItem num={s.num} suffix={s.suffix} label={locale === 'pt' ? s.labelPt : s.labelEn} />
@@ -331,7 +336,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
         <h2 style={{ fontFamily: syne, fontWeight: 800, fontSize: 'clamp(36px,5vw,80px)', letterSpacing: '-0.03em', lineHeight: 0.9, color: '#0D0D0D', margin: '0 0 clamp(48px,6vw,80px)' }}>
           {t.stack.heading}
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px,1fr))', gap: 'clamp(32px,4vw,56px)' }}>
+        <div className="stack-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px,1fr))', gap: 'clamp(32px,4vw,56px)' }}>
           {stack.map(group => (
             <div key={group.category}>
               <p style={{ fontFamily: inter, fontSize: '0.62rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#6B6B6B', margin: '0 0 16px' }}>
