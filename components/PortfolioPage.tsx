@@ -177,8 +177,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
   }, [checkNav])
 
   const stats = [
-    { num: 3,   suffix: '+', labelPt: 'Projetos entregues',    labelEn: 'Projects delivered' },
-    { num: 2,   suffix: '',  labelPt: 'Anos de experiência',   labelEn: 'Years experience'   },
+    { num: 3,   suffix: '+', labelPt: 'Anos de experiência',   labelEn: 'Years experience'   },
     { num: 100, suffix: '%', labelPt: 'Satisfação dos clientes', labelEn: 'Client satisfaction' },
   ]
 
@@ -345,31 +344,39 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* ── Journey ───────────────────────────────────────────────────── */}
-      <section id="journey" style={{ background: '#f0ece6', padding: 'clamp(60px,10vw,140px) clamp(24px,4vw,64px)' }}>
-        <p style={{ fontFamily: syne, fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#6B6B6B', margin: '0 0 20px' }}>
-          {t.journey.eyebrow}
-        </p>
-        <h2 style={{ fontFamily: syne, fontWeight: 800, fontSize: 'clamp(36px,5vw,80px)', letterSpacing: '-0.03em', lineHeight: 0.9, color: '#0D0D0D', margin: '0 0 clamp(48px,6vw,80px)' }}>
-          {t.journey.heading}
-        </h2>
-        <div style={{ position: 'relative', paddingLeft: 'clamp(20px,3vw,40px)', borderLeft: `1px solid ${DARK}28`, maxWidth: 800 }}>
-          {timeline.map((entry, i) => (
-            <div key={i} style={{ position: 'relative', marginBottom: i < timeline.length - 1 ? 'clamp(36px,5vw,56px)' : 0 }}>
-              <div style={{ position: 'absolute', left: 'clamp(-26px,-2.2vw,-21px)', top: 5, width: 9, height: 9, borderRadius: '50%', border: `2px solid ${DARK}`, background: '#f0ece6' }} />
-              <p style={{ fontFamily: inter, fontSize: '0.63rem', fontWeight: 500, color: '#6B6B6B', letterSpacing: '0.1em', textTransform: 'uppercase', margin: '0 0 4px' }}>
-                {locale === 'pt' ? entry.year : entry.yearEn}
-              </p>
-              <h3 style={{ fontFamily: syne, fontWeight: 700, fontSize: 'clamp(16px,1.4vw,22px)', color: '#0D0D0D', margin: '0 0 3px' }}>
-                {locale === 'pt' ? entry.titlePt : entry.titleEn}
-              </h3>
-              <p style={{ fontFamily: inter, fontSize: '0.77rem', color: '#6B6B6B', margin: '0 0 8px' }}>
-                {locale === 'pt' ? entry.placePt : entry.placeEn}
-              </p>
-              <p style={{ fontFamily: inter, fontSize: 'clamp(13px,1vw,15px)', color: '#6B6B6B', lineHeight: 1.65, margin: 0, maxWidth: 600 }}>
-                {locale === 'pt' ? entry.descriptionPt : entry.descriptionEn}
-              </p>
-            </div>
-          ))}
+      <section id="journey" style={{ position: 'relative', padding: 'clamp(60px,10vw,140px) clamp(24px,4vw,64px)', overflow: 'hidden' }}>
+        {/* Background photo */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/journey-bg.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(5,10,28,0.55)' }} />
+        </div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ fontFamily: syne, fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', margin: '0 0 20px' }}>
+            {t.journey.eyebrow}
+          </p>
+          <h2 style={{ fontFamily: syne, fontWeight: 800, fontSize: 'clamp(36px,5vw,80px)', letterSpacing: '-0.03em', lineHeight: 0.9, color: 'white', margin: '0 0 clamp(48px,6vw,80px)' }}>
+            {t.journey.heading}
+          </h2>
+          <div style={{ position: 'relative', paddingLeft: 'clamp(20px,3vw,40px)', borderLeft: '1px solid rgba(255,255,255,0.2)', maxWidth: 800 }}>
+            {timeline.map((entry, i) => (
+              <div key={i} style={{ position: 'relative', marginBottom: i < timeline.length - 1 ? 'clamp(36px,5vw,56px)' : 0 }}>
+                <div style={{ position: 'absolute', left: 'clamp(-26px,-2.2vw,-21px)', top: 5, width: 9, height: 9, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.6)', background: 'transparent' }} />
+                <p style={{ fontFamily: inter, fontSize: '0.63rem', fontWeight: 500, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase', margin: '0 0 4px' }}>
+                  {locale === 'pt' ? entry.year : entry.yearEn}
+                </p>
+                <h3 style={{ fontFamily: syne, fontWeight: 700, fontSize: 'clamp(16px,1.4vw,22px)', color: 'white', margin: '0 0 3px' }}>
+                  {locale === 'pt' ? entry.titlePt : entry.titleEn}
+                </h3>
+                <p style={{ fontFamily: inter, fontSize: '0.77rem', color: 'rgba(255,255,255,0.5)', margin: '0 0 8px' }}>
+                  {locale === 'pt' ? entry.placePt : entry.placeEn}
+                </p>
+                <p style={{ fontFamily: inter, fontSize: 'clamp(13px,1vw,15px)', color: 'rgba(255,255,255,0.65)', lineHeight: 1.65, margin: 0, maxWidth: 600 }}>
+                  {locale === 'pt' ? entry.descriptionPt : entry.descriptionEn}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -390,7 +397,7 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
         </a>
         <div style={{ marginTop: 'clamp(60px,8vw,100px)', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 32, display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', gap: 'clamp(16px,3vw,40px)' }}>
-            {[['GitHub', 'https://github.com/JuanGabrielGomes'], ['LinkedIn', 'https://linkedin.com/in/juan-gabriel-gomes-274474282'], ['Instagram', 'https://instagram.com/juangabriielgomes']].map(([label, href]) => (
+            {[['GitHub', 'https://github.com/JuanGabrielGomes'], ['LinkedIn', 'https://linkedin.com/in/juan-gabriel-gomes-274474282'], ['Instagram', 'https://instagram.com/juangabriielgomes'], ['glimweb.com', 'https://glimweb.com']].map(([label, href]) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 style={{ fontFamily: inter, fontSize: '0.82rem', color: 'rgba(255,255,255,0.35)', textDecoration: 'none' }}>
                 {label}

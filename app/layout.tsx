@@ -1,11 +1,18 @@
 import type { Metadata } from 'next'
-import { Syne, Inter } from 'next/font/google'
+import { Syne, Inter, Instrument_Serif } from 'next/font/google'
 import './globals.css'
 
 const syne = Syne({
   subsets: ['latin'],
   variable: '--font-syne',
   weight: ['400', '700', '800'],
+})
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  weight: '400',
+  style: ['normal', 'italic'],
 })
 
 const inter = Inter({
@@ -27,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt" className={`${syne.variable} ${inter.variable}`}>
+    <html lang="pt" className={`${syne.variable} ${inter.variable} ${instrumentSerif.variable}`}>
       <body style={{ overflowX: 'clip', margin: 0 }}>
         <script
           type="application/ld+json"

@@ -32,8 +32,9 @@ export const projects = [
 ]
 
 export const stack = [
-  { category: 'Frontend', items: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
+  { category: 'Frontend', items: ['Next.js', 'React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Framer Motion'] },
   { category: 'Backend', items: ['Node.js', 'Supabase', 'PostgreSQL'] },
+  { category: 'Linguagens', items: ['TypeScript', 'JavaScript', 'C++', 'Java'] },
   { category: 'Deploy', items: ['Vercel', 'Git'] },
   { category: 'Design', items: ['Figma'] },
 ]
