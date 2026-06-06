@@ -16,9 +16,6 @@ const LIFT_AT = TYPE_START + FULL_TEXT.length * CHAR_INTERVAL + 450
 const syne = 'var(--font-syne), sans-serif'
 const inter = 'var(--font-inter), sans-serif'
 
-function smoothstep(t: number) { return t * t * (3 - 2 * t) }
-function clamp(v: number, min: number, max: number) { return Math.max(min, Math.min(max, v)) }
-
 // ─── CountUp ───────────────────────────────────────────────────────────────
 function useCountUp(end: number, suffix: string, duration = 2000) {
   const [display, setDisplay] = useState('0' + suffix)
@@ -50,66 +47,6 @@ function StatItem({ num, suffix, label }: { num: number; suffix: string; label: 
     <div ref={ref}>
       <div style={{ fontFamily: inter, fontWeight: 300, color: 'white', fontSize: 'clamp(36px,4.5vw,72px)', lineHeight: 1.1 }}>{display}</div>
       <div style={{ fontFamily: inter, fontWeight: 400, color: 'rgba(255,255,255,0.5)', fontSize: 'clamp(12px,1.1vw,16px)', marginTop: 'clamp(4px,0.5vw,8px)', letterSpacing: '0.01em' }}>{label}</div>
-    </div>
-  )
-}
-
-// ─── Orb 3D ────────────────────────────────────────────────────────────────
-function Orb() {
-  return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '50%' }}>
-      {/* Base sphere */}
-      <div style={{
-        position: 'absolute', inset: 0, borderRadius: '50%',
-        background: 'radial-gradient(circle at 38% 32%, #1e3d72 0%, #12213B 48%, #060f1d 100%)',
-        boxShadow: '0 0 60px rgba(18,50,120,0.65), 0 0 140px rgba(10,30,80,0.35), inset 0 0 60px rgba(0,0,0,0.5)',
-      }} />
-
-      {/* Latitude lines */}
-      <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden' }}>
-        {[25, 42, 58, 75].map(top => (
-          <div key={top} style={{
-            position: 'absolute', left: '5%', right: '5%',
-            top: `${top}%`, height: 1,
-            background: 'rgba(100,160,255,0.12)',
-            borderRadius: 1,
-          }} />
-        ))}
-      </div>
-
-      {/* Longitude lines — rotating ring */}
-      <div style={{
-        position: 'absolute', inset: '-2%',
-        borderRadius: '50%',
-        border: '1px solid rgba(80,140,255,0.1)',
-        animation: 'spin-orb 18s linear infinite',
-      }}>
-        <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: 1, background: 'rgba(80,140,255,0.12)', transform: 'translateY(-50%)' }} />
-        <div style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 1, background: 'rgba(80,140,255,0.1)', transform: 'translateX(-50%)' }} />
-      </div>
-
-      {/* Second ring tilted */}
-      <div style={{
-        position: 'absolute', inset: '5%',
-        borderRadius: '50%',
-        border: '1px solid rgba(60,120,255,0.08)',
-        animation: 'spin-orb-reverse 24s linear infinite',
-        transform: 'rotate3d(1, 0.5, 0, 55deg)',
-      }} />
-
-      {/* Inner glow highlight */}
-      <div style={{
-        position: 'absolute', borderRadius: '50%',
-        width: '45%', height: '40%', top: '12%', left: '18%',
-        background: 'radial-gradient(circle, rgba(120,170,255,0.15) 0%, transparent 70%)',
-      }} />
-
-      {/* Subtle outer halo */}
-      <div style={{
-        position: 'absolute', inset: '-8%', borderRadius: '50%',
-        background: 'radial-gradient(circle, transparent 60%, rgba(18,50,120,0.18) 80%, transparent 100%)',
-        pointerEvents: 'none',
-      }} />
     </div>
   )
 }
@@ -205,16 +142,6 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
   const [navColor, setNavColor] = useState(DARK)
   const [navHamHover, setNavHamHover] = useState(false)
 
-  // Orb position (driven by scroll after liftDone)
-  const [orbStyle, setOrbStyle] = useState<React.CSSProperties>({
-    position: 'fixed', bottom: 0, left: '50%',
-    width: 'min(58vw, 720px)', height: 'min(58vw, 720px)',
-    transform: 'translateX(-50%) translateY(100%)',
-    zIndex: 22, pointerEvents: 'none',
-    transition: 'transform 1.5s cubic-bezier(0.45, 0, 0.15, 1) 0.3s',
-  })
-  const [orbOpacity, setOrbOpacity] = useState(1)
-
   const heroRef = useRef<HTMLElement>(null)
   const darkRef = useRef<HTMLDivElement>(null)
   const galleryRef = useRef<HTMLDivElement>(null)
@@ -229,69 +156,9 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
     timers.push(setTimeout(() => setShowCursor(false), LIFT_AT - 150))
     timers.push(setTimeout(() => setLifting(true), LIFT_AT))
     timers.push(setTimeout(() => setHeroVisible(true), LIFT_AT + 900))
-    timers.push(setTimeout(() => {
-      setLiftDone(true)
-      // Rise orb from below with transition
-      setOrbStyle(prev => ({ ...prev, transform: 'translateX(-50%) translateY(28%)' }))
-    }, LIFT_AT + 1600))
+    timers.push(setTimeout(() => setLiftDone(true), LIFT_AT + 1600))
     return () => timers.forEach(clearTimeout)
   }, [])
-
-  // ── Scroll: drive orb position ──────────────────────────────────────────
-  const updateOrb = useCallback(() => {
-    if (!liftDone || !heroRef.current || !darkRef.current) return
-
-    const heroRect = heroRef.current.getBoundingClientRect()
-    const darkRect = darkRef.current.getBoundingClientRect()
-    const vh = window.innerHeight
-    const heroH = heroRef.current.offsetHeight
-
-    // progress: 0 = orb at rest, 1 = orb fully in dark section
-    const triggerPx = heroH * 0.28
-    const rangePx = heroH * 0.6
-    const scrolled = -heroRect.top
-    const progress = clamp((scrolled - triggerPx) / rangePx, 0, 1)
-    const t2 = smoothstep(progress)
-
-    const orbSize = Math.min(window.innerWidth * 0.58, 720)
-    const startY = 28     // % down (partially cropped at hero bottom)
-    const finalY = (darkRect.top - vh + orbSize * 0.6) / orbSize * -100 - 20
-
-    const currentY = startY + (finalY - startY) * t2
-    const scale = 1 + 0.42 * t2
-
-    // Fade out as gallery section comes in
-    const galleryRect = galleryRef.current?.getBoundingClientRect()
-    if (galleryRect && galleryRect.top < vh * 0.6) {
-      setOrbOpacity(clamp((galleryRect.top - vh * 0.2) / (vh * 0.4), 0, 1))
-    } else {
-      setOrbOpacity(1)
-    }
-
-    setOrbStyle({
-      position: 'fixed', bottom: 0, left: '50%',
-      width: 'min(58vw, 720px)', height: 'min(58vw, 720px)',
-      transform: `translateX(-50%) translateY(${currentY}%) scale(${scale})`,
-      zIndex: 22, pointerEvents: 'none',
-      transition: 'none',
-    })
-  }, [liftDone])
-
-  useEffect(() => {
-    if (!liftDone) return
-    // Remove entrance transition after it completes, then let scroll take over
-    const timer = setTimeout(() => {
-      setOrbStyle(prev => ({ ...prev, transition: 'none' }))
-      updateOrb()
-    }, 1700)
-    window.addEventListener('scroll', updateOrb, { passive: true })
-    window.addEventListener('resize', updateOrb, { passive: true })
-    return () => {
-      clearTimeout(timer)
-      window.removeEventListener('scroll', updateOrb)
-      window.removeEventListener('resize', updateOrb)
-    }
-  }, [liftDone, updateOrb])
 
   // ── Nav color ──────────────────────────────────────────────────────────
   const checkNav = useCallback(() => {
@@ -333,13 +200,6 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
           </div>
         </div>
       )}
-
-      {/* ── Orb ───────────────────────────────────────────────────────── */}
-      <div style={{ ...orbStyle, opacity: orbOpacity, transition: orbStyle.transition === 'none' ? 'opacity 0.5s' : orbStyle.transition }} aria-hidden>
-        <div style={{ width: '100%', height: '100%', animation: 'float 7s ease-in-out infinite' }}>
-          <Orb />
-        </div>
-      </div>
 
       {/* ── Nav ───────────────────────────────────────────────────────── */}
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'clamp(16px,2vw,20px) clamp(24px,4vw,64px)' }}>
