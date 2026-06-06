@@ -100,36 +100,35 @@ function ProjectTile({ project, locale, index }: { project: typeof projects[0]; 
 
       {/* Bottom content */}
       <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: 'clamp(14px,1.8vw,26px)' }}>
-        {/* Expandable content */}
-        <div className={expanded ? 'gallery-card-expand' : ''} style={{ overflow: 'hidden', maxHeight: expanded ? 300 : 0, transition: 'max-height 0.45s cubic-bezier(0.4,0,0.2,1)', marginBottom: expanded ? 14 : 0 }}>
-          <p style={{ fontFamily: inter, fontSize: 'clamp(11px,0.78vw,13px)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.65, margin: '0 0 12px' }}>
+        {/* Expandable description + tags */}
+        <div style={{ overflow: 'hidden', maxHeight: expanded ? 300 : 0, transition: 'max-height 0.45s cubic-bezier(0.4,0,0.2,1)', marginBottom: expanded ? 12 : 0 }}>
+          <p style={{ fontFamily: inter, fontSize: 'clamp(11px,0.78vw,13px)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.65, margin: '0 0 10px' }}>
             {description}
           </p>
-          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginBottom: 14 }}>
+          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
             {project.tags.map(tag => (
               <span key={tag} style={{ fontFamily: inter, fontSize: '0.55rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 100, padding: '3px 9px' }}>{tag}</span>
             ))}
           </div>
-          <div style={{ display: 'flex', gap: 14 }}>
-            {project.url && (
-              <a href={project.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
-                style={{ fontFamily: inter, fontSize: '0.68rem', color: style.accent, textDecoration: 'none', opacity: 0.9 }}>
-                {locale === 'pt' ? 'Ver site ↗' : 'Visit ↗'}
-              </a>
-            )}
-            <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
-              style={{ fontFamily: inter, fontSize: '0.68rem', color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>
-              GitHub ↗
-            </a>
-          </div>
         </div>
 
-        <h3 style={{ fontFamily: syne, fontWeight: 700, fontSize: 'clamp(13px,1.15vw,20px)', color: 'white', margin: '0 0 4px', lineHeight: 1.2 }}>
+        <h3 style={{ fontFamily: syne, fontWeight: 700, fontSize: 'clamp(13px,1.15vw,20px)', color: 'white', margin: '0 0 8px', lineHeight: 1.2 }}>
           {project.name}
         </h3>
-        <p className={expanded ? 'gallery-card-tags' : ''} style={{ fontFamily: inter, fontSize: '0.58rem', color: 'rgba(255,255,255,0.3)', margin: 0, letterSpacing: '0.05em', opacity: expanded ? 0 : 1, transition: 'opacity 0.2s' }}>
-          {project.tags.slice(0, 3).join(' · ')}
-        </p>
+
+        {/* Links — always visible */}
+        <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+          {project.url && (
+            <a href={project.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+              style={{ fontFamily: inter, fontSize: '0.65rem', color: style.accent, textDecoration: 'none', opacity: 0.9 }}>
+              {locale === 'pt' ? 'Ver site ↗' : 'Visit ↗'}
+            </a>
+          )}
+          <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+            style={{ fontFamily: inter, fontSize: '0.65rem', color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}>
+            GitHub ↗
+          </a>
+        </div>
       </div>
     </div>
   )
