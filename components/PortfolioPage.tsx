@@ -55,6 +55,7 @@ function StatItem({ num, suffix, label }: { num: number; suffix: string; label: 
 const PROJECT_STYLES = [
   { bg: 'linear-gradient(145deg, #100820 0%, #1a0f35 100%)', accent: '#7c3aed', label: 'E-Commerce' },
   { bg: 'linear-gradient(145deg, #061420 0%, #092030 100%)', accent: '#0891b2', label: 'Institucional' },
+  { bg: 'linear-gradient(145deg, #1a1000 0%, #2a1c00 100%)', accent: '#f0a855', label: 'Marketing' },
   { bg: 'linear-gradient(145deg, #081410 0%, #0d2018 100%)', accent: '#059669', label: 'IoT / Hardware' },
 ]
 
@@ -301,11 +302,13 @@ export default function PortfolioPage({ locale }: { locale: Locale }) {
       {/* ── Projects gallery ───────────────────────────────────────────── */}
       <div id="work" ref={galleryRef} className="gallery-section"
         style={{ position: 'relative', zIndex: 25, marginTop: '-100vh', background: DARK, height: '100vh', overflow: 'hidden' }}>
-        {/* Faded background watermark */}
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', overflow: 'hidden', zIndex: 0, pointerEvents: 'none', opacity: 0.03 }}>
-          <span style={{ fontFamily: syne, fontWeight: 800, fontSize: 'clamp(100px,14vw,220px)', color: 'white', whiteSpace: 'nowrap', letterSpacing: '-0.02em', userSelect: 'none' }}>
-            {'Juan Gabriel.   Juan Gabriel.   Juan Gabriel.   '}
-          </span>
+        {/* Marquee watermark */}
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', overflow: 'hidden', zIndex: 0, pointerEvents: 'none', opacity: 0.04 }}>
+          <div className="marquee-track" style={{ fontFamily: syne, fontWeight: 800, fontSize: 'clamp(100px,14vw,220px)', color: 'white', whiteSpace: 'nowrap', letterSpacing: '-0.02em', userSelect: 'none' }}>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <span key={i} style={{ paddingRight: '0.6em' }}>Juan Gabriel Gomes.</span>
+            ))}
+          </div>
         </div>
         <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'clamp(24px,4vw,60px)' }}>
           <p style={{ fontFamily: syne, fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', margin: '0 0 20px' }}>

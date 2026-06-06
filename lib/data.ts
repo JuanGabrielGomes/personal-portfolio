@@ -20,6 +20,16 @@ export const projects = [
     image: '/images/ottea.png',
   },
   {
+    slug: 'sabores-em-foco',
+    name: 'Sabores em Foco',
+    descriptionPt: 'Site portfólio para agência de marketing gastronômico. Landing page bilíngue com identidade visual, cases e formulário de contato.',
+    descriptionEn: 'Portfolio site for a gastronomy marketing agency. Bilingual landing page with visual identity, case studies, and contact form.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    url: 'https://saboresemfoco.com',
+    github: 'https://github.com/JuanGabrielGomes/sabores-em-foco',
+    image: null,
+  },
+  {
     slug: 'kedra-pet',
     name: 'Kedra Pet',
     descriptionPt: 'Dispenser de ração automatizado controlado pela web. Firmware ESP32 (C++) comunica com servidor Node.js via WebSocket para acionar alimentação e ler o peso do prato.',
