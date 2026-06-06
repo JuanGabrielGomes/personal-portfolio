@@ -7,7 +7,7 @@ export const projects = [
     tags: ['Next.js', 'TypeScript', 'Supabase', 'Zustand', 'Tailwind'],
     url: 'https://mocellinjoias.com.br',
     github: 'https://github.com/JuanGabrielGomes/mocellin-ecommerce',
-    image: '/images/mocellin.jpg',
+    image: '/images/mocellin.png',
   },
   {
     slug: 'ottea-studio',
@@ -17,7 +17,7 @@ export const projects = [
     tags: ['Next.js', 'TypeScript', 'Framer Motion', 'Nodemailer'],
     url: 'https://otteastudio.com',
     github: 'https://github.com/JuanGabrielGomes/Tea-Strategy-Studio',
-    image: '/images/ottea.jpg',
+    image: '/images/ottea.png',
   },
   {
     slug: 'kedra-pet',
